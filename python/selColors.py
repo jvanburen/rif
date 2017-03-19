@@ -1,6 +1,9 @@
 import cv2
 import numpy as np
 
+def trainBayes():
+  
+
 def selColors(img):
   lab = cv2.cvtColor(img, cv2.COLOR_RGB2LAB)
   L = lab[:, :, 0]
@@ -17,12 +20,7 @@ def selColors(img):
 
   # sqrtthing = np.sqrt(np.square(sobelx)+np.square(sobely))
 
-  kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(3,3))
-  fgbg = cv2.createBackgroundSubtractorGMG()
-
-  fgmask = fgbg.apply(lab)
-  fgmask = cv2.morphologyEx(fgmask, cv2.MORPH_OPEN, kernel)
-  cv2.imshow('frame',fgmask)
+  cv2.NormalBayesClassifier.train(lab, [])
 
 
 I = cv2.imread('resistor.png')
