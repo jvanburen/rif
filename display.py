@@ -4,6 +4,8 @@ from PIL import ImageFont, ImageDraw, Image
 from time import monotonic, sleep
 from symbols import OMEGA, RESISTOR
 
+__all__ = ['display', 'Display']
+
 class Display:
   HOLD_TIME = 5.0 # seconds
   def __init__(self):
@@ -15,7 +17,12 @@ class Display:
     self.ohm.putdata(OMEGA)
     self.resistor = Image.new("1", (25, 10), None)
     self.resistor.putdata(RESISTOR)
-    self.welcome_screen()
+    self.loading_screen()
+
+  def loading_screen(self):
+    with canvas(self.device) as draw:
+      draw.rectangle((0, 0, self.device.width, self.device.height), outline=0, fill=0)
+      draw.text((20, 23), "Loading...", fill=255, font=self.font)
 
   def welcome_screen(self):
     with canvas(self.device) as draw:
@@ -67,18 +74,17 @@ class Display:
       resistance //= 1000
       suffix += 1
     return str(resistance) + suffixes[suffix]
-    
 
 #\u2126
 
-d = Display()
+display = Display()
 # sleep(5)
-d.draw_resistance(15)
-sleep(3)
-d.draw_resistance(12300)
-sleep(2)
-d.draw_resistance(None)
-sleep(3)
-d.draw_resistance(None)
-sleep(3)
-d.draw_resistance(434000)
+# display.draw_resistance(15)
+# sleep(3)
+# display.draw_resistance(12300)
+# sleep(2)
+# display.draw_resistance(None)
+# sleep(3)
+# display.draw_resistance(None)
+# sleep(3)
+# display.draw_resistance(434000)
