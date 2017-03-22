@@ -34,8 +34,8 @@ class Classifier:
     _, contours, _ = cv2.findContours(opened, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
     if not contours:
       print('no contours found!')
-      cv2.imwrite('bad.png', fgbw8)
-      cv2.imwrite('badopen.png', opened)
+      # cv2.imwrite('bad.png', fgbw8)
+      # cv2.imwrite('badopen.png', opened)
       return None
     biggest_contour = max(contours, key=cv2.contourArea)
     if cv2.contourArea(biggest_contour) < 800:
